@@ -11,7 +11,7 @@ func set_score(score: int):
 
 
 func show_death_screan(score: int):
-	label.text = "your score: " + str(score)
+	death_label.text = "your score: " + str(score)
 	death_panel.show()
 
 
