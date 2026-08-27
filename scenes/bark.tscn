@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://btclu2i06enr0"]
+
+[ext_resource type="Texture2D" uid="uid://5dngnfvu8mo0" path="res://bark.png" id="1_opluj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7541"]
+size = Vector2(74, 652)
+
+[node name="bark" type="Node2D" unique_id=2039228385]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1223037623]
+offset_right = 38.0
+offset_bottom = 163.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_opluj")
+stretch_mode = 1
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1385687577]
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=822926532]
+position = Vector2(66, 326)
+shape = SubResource("RectangleShape2D_u7541")

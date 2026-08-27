@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://umbsesvb24gl"]
+
+[ext_resource type="Script" uid="uid://b41c6wqy3ptcf" path="res://scripts/obsticle.gd" id="1_8ss72"]
+[ext_resource type="PackedScene" uid="uid://btclu2i06enr0" path="res://scenes/bark.tscn" id="2_mime0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7541"]
+size = Vector2(74, 282)
+
+[node name="Obsticle" type="Area2D" unique_id=2036562908]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_8ss72")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2116398488]
+position = Vector2(0, 35)
+shape = SubResource("RectangleShape2D_u7541")
+
+[node name="bark" parent="." unique_id=2039228385 instance=ExtResource("2_mime0")]
+position = Vector2(-59, -773)
+
+[node name="bark2" parent="." unique_id=98730391 instance=ExtResource("2_mime0")]
+position = Vector2(-64, 189)

@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://r0b2ih5oftq7"]
+
+[ext_resource type="PackedScene" uid="uid://dql1807glah6l" path="res://scenes/bird.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://lxexj6ebg4j0" path="res://scripts/roller.gd" id="2_4wyf3"]
+[ext_resource type="Script" uid="uid://2ylttkn5ii2" path="res://scripts/out_zone.gd" id="4_71j4m"]
+[ext_resource type="Script" uid="uid://dm1lns0ccyejh" path="res://scripts/spawner.gd" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://d0465hr1a16yt" path="res://scenes/UI.tscn" id="5_71j4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7541"]
+size = Vector2(2952, 497)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wyf3"]
+size = Vector2(510, 1690)
+
+[node name="world" type="Node2D" unique_id=82109021]
+
+[node name="Bird" parent="." unique_id=787990776 instance=ExtResource("1_nnsk1")]
+position = Vector2(6, 7)
+jump_power = -500.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=748162935]
+
+[node name="BottomDeathZone" type="Area2D" parent="." unique_id=1872864840]
+position = Vector2(796, 0)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomDeathZone" unique_id=226526090]
+position = Vector2(-794, 601.5)
+shape = SubResource("RectangleShape2D_u7541")
+
+[node name="TopDeathZone2" type="Area2D" parent="." unique_id=1268222580]
+position = Vector2(796, 0)
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopDeathZone2" unique_id=572730779]
+position = Vector2(-794, -677)
+shape = SubResource("RectangleShape2D_u7541")
+
+[node name="roller" type="Node2D" parent="." unique_id=562282703]
+script = ExtResource("2_4wyf3")
+
+[node name="spawner" type="Node2D" parent="." unique_id=270909949 node_paths=PackedStringArray("roller")]
+position = Vector2(796, 0)
+script = ExtResource("4_k0juu")
+roller = NodePath("../roller")
+time = 1.0
+min_height = -200
+max_height = 200
+
+[node name="Timer" type="Timer" parent="spawner" unique_id=1067620016]
+
+[node name="OutZone" type="Area2D" parent="." unique_id=1383660068]
+position = Vector2(-1595, 0)
+script = ExtResource("4_71j4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutZone" unique_id=1716602622]
+shape = SubResource("RectangleShape2D_4wyf3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=319874138]
+
+[node name="UI" parent="CanvasLayer" unique_id=586587110 instance=ExtResource("5_71j4m")]
+unique_name_in_owner = true
+
+[connection signal="dead" from="Bird" to="roller" method="_on_bird_dead"]
+[connection signal="area_entered" from="OutZone" to="OutZone" method="_on_area_entered"]
